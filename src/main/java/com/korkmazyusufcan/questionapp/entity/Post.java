@@ -34,4 +34,8 @@ public class Post {
     @CreationTimestamp
     private LocalDate creationDate;
 
+    public Post(User user, String text) {
+        this.user = user;
+        this.text = text;
+    }
 }

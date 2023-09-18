@@ -12,7 +12,6 @@ public class UserMapper {
 
     public UserDto toDto(User user){
         return new UserDto(
-                user.getId(),
                 user.getName(),
                 user.getSurname(),
                 user.getEmail(),
@@ -22,11 +21,9 @@ public class UserMapper {
 
     public User toEntity(UserDto userDto){
         return new User(
-                userDto.getId(),
                 userDto.getName(),
                 userDto.getSurname(),
-                userDto.getEmail(),
-                userDto.getCreationDate()
+                userDto.getEmail()
         );
     }
 

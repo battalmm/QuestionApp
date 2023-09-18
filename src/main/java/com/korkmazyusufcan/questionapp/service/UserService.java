@@ -18,9 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
     private  final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository,
-                       UserMapper userMapper) {
-
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
     }
@@ -28,16 +26,14 @@ public class UserService {
     public UserDto createNewUser(UserCreateRequest userCreateRequest) {
         //TODO
         // THIS MAIL ADDRESS IS ALREADY TAKEN CHANGE EXCEPTION
-        // check mails
+        // CHECK MAILS
         User newUser = new User(
                 userCreateRequest.getName(),
                 userCreateRequest.getSurname(),
                 userCreateRequest.getEmail()
         );
-
         userRepository.save(newUser);
         return userMapper.toDto(newUser);
-
     }
 
     public List<UserDto> getAllUsers() {
@@ -55,24 +51,30 @@ public class UserService {
         return userMapper.toDto(user);
     }
 
-    public void deleteUserById(Long userId) {
-        //TODO
-        // USER NOT FOUND EXCEPTION
-        //User user = userRepository.findById(id).orElseThrow(null);
-        userRepository.deleteById(userId);
-
-    }
-
     public UserDto updateUser(Long userId, UserUpdateRequest userUpdateRequest) {
         //TODO
-        // USER NOT FOUND EXCEPTION
+        // USER NOT FOUND CASE SHOULD BE IMPLEMENT ALSO EXCEPTION
         User user = userRepository.findById(userId).orElseThrow(null);
         user.setEmail(userUpdateRequest.getEmail());
         user.setName(userUpdateRequest.getName());
         user.setSurname(userUpdateRequest.getSurname());
         userRepository.save(user);
         return userMapper.toDto(user);
+    }
 
+    public void deleteUserById(Long userId) {
+        //TODO
+        // USER NOT FOUND EXCEPTION
+        userRepository.deleteById(userId);
+    }
 
+    protected User findUserById(Long id){
+        //TODO
+        // USER NOT FOUND EXCEPTION
+        return userRepository.findById(id).orElseThrow();
+    }
+
+    protected Boolean isEmailExist(String email){
+        return userRepository.findByEmail(email) != null;
     }
 }

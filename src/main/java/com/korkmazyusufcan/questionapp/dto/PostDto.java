@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class PostDto {
 
-    private Long id;
 
     private UserDto user;
 

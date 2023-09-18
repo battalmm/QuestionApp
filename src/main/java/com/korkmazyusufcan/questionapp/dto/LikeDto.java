@@ -13,8 +13,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class LikeDto {
 
-    private Long id;
-
     private PostDto post;
 
     private UserDto user;

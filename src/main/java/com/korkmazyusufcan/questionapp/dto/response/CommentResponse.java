@@ -1,24 +1,18 @@
-package com.korkmazyusufcan.questionapp.dto;
+package com.korkmazyusufcan.questionapp.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentDto {
+public class CommentResponse {
 
-    private PostDto post;
-
-    private UserDto user;
-
+    private Long id;
+    private String userName;
     private String text;
-
-    private LocalDate creationDate;
 
 }

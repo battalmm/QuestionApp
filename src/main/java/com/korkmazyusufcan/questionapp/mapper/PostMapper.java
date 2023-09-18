@@ -18,7 +18,6 @@ public class PostMapper {
 
     public PostDto toDto(Post post){
         return new PostDto(
-                post.getId(),
                 userMapper.toDto(post.getUser()),
                 post.getText(),
                 post.getCreationDate()
