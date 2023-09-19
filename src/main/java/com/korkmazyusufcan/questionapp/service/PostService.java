@@ -7,7 +7,6 @@ import com.korkmazyusufcan.questionapp.entity.Post;
 import com.korkmazyusufcan.questionapp.mapper.PostMapper;
 import com.korkmazyusufcan.questionapp.repository.PostRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,20 +16,14 @@ public class PostService {
     private final PostRepository postRepository;
 
     private final UserService userService;
-    private final LikeService likeService;
-    private final CommentService commentService;
     private final PostMapper postMapper;
 
     public PostService(PostRepository postRepository,
                        UserService userService,
-                       LikeService likeService,
-                       CommentService commentService,
                        PostMapper postMapper) {
 
         this.postRepository = postRepository;
         this.userService = userService;
-        this.likeService = likeService;
-        this.commentService = commentService;
         this.postMapper = postMapper;
     }
 
@@ -72,5 +65,11 @@ public class PostService {
         //TODO
         // POST NOT FOUND CASE SHOULD BE IMPLEMENT
         postRepository.deleteById(postId);
+    }
+
+    protected Post findPostById(Long postId){
+        //TODO
+        // POST NOT FOUND CASE SHOULD BE IMPLEMENT
+        return postRepository.findById(postId).orElseThrow(null);
     }
 }

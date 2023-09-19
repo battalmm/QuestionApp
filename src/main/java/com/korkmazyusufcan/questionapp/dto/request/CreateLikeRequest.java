@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostCreateRequest {
+public class CreateLikeRequest {
 
     private Long userId;
-
-    private String text;
+    private Long postId;
 
 }

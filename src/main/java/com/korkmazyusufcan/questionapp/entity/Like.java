@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import java.time.LocalDate;
 
 @Builder
@@ -33,4 +32,9 @@ public class Like {
 
     @CreationTimestamp
     private LocalDate creationDate;
+
+    public Like(Post post, User user) {
+        this.post = post;
+        this.user = user;
+    }
 }

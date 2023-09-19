@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import java.time.LocalDate;
 
 @Builder
@@ -36,4 +35,12 @@ public class Comment {
 
     @CreationTimestamp
     private LocalDate creationDate;
+
+    public Comment(Post post,
+                   User user,
+                   String text) {
+        this.post = post;
+        this.user = user;
+        this.text = text;
+    }
 }

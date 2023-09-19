@@ -7,8 +7,6 @@ import com.korkmazyusufcan.questionapp.entity.User;
 import com.korkmazyusufcan.questionapp.mapper.UserMapper;
 import com.korkmazyusufcan.questionapp.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 

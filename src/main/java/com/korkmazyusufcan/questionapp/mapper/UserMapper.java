@@ -3,7 +3,6 @@ package com.korkmazyusufcan.questionapp.mapper;
 import com.korkmazyusufcan.questionapp.dto.UserDto;
 import com.korkmazyusufcan.questionapp.entity.User;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

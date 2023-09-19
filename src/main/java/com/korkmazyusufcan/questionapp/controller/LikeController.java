@@ -1,6 +1,6 @@
 package com.korkmazyusufcan.questionapp.controller;
 
-import com.korkmazyusufcan.questionapp.dto.LikeDto;
+import com.korkmazyusufcan.questionapp.dto.request.CreateLikeRequest;
 import com.korkmazyusufcan.questionapp.dto.response.LikeResponse;
 import com.korkmazyusufcan.questionapp.service.LikeService;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/likes")
+@RequestMapping("api/v1/likes")
 public class LikeController {
 
     private  final LikeService likeService;
@@ -19,20 +19,19 @@ public class LikeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<LikeResponse>> getAllLikes(@RequestBody Optional<Long> postId,
-                                                          @RequestBody Optional<Long> userId){
+    public ResponseEntity<List<LikeResponse>> getAllLikes(@RequestParam Optional<Long> postId,
+                                                          @RequestParam Optional<Long> userId){
         return ResponseEntity.ok(likeService.getAllLikesWithParameter(postId,userId));
     }
 
     @GetMapping("/{likeId}")
-    public ResponseEntity<LikeDto> getLikeById(@PathVariable Long likeId){
+    public ResponseEntity<LikeResponse> getLikeById(@PathVariable Long likeId){
         return ResponseEntity.ok(likeService.getLikeById(likeId));
     }
 
     @PostMapping
-    public ResponseEntity<String> createLike(@RequestBody PostLikeRequest postLikeRequest){
-        likeService.createLike(postLikeRequest);
-        return ResponseEntity.ok("Like created");
+    public ResponseEntity<LikeResponse> createLike(@RequestBody CreateLikeRequest createLikeRequest){
+        return ResponseEntity.ok( likeService.createLike(createLikeRequest));
     }
 
     @DeleteMapping("/{likeId}")
