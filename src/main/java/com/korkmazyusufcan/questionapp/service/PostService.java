@@ -4,6 +4,8 @@ import com.korkmazyusufcan.questionapp.dto.PostDto;
 import com.korkmazyusufcan.questionapp.dto.request.PostCreateRequest;
 import com.korkmazyusufcan.questionapp.dto.request.PostUpdateRequest;
 import com.korkmazyusufcan.questionapp.entity.Post;
+import com.korkmazyusufcan.questionapp.exception.ExceptionEntity;
+import com.korkmazyusufcan.questionapp.exception.NotFoundException;
 import com.korkmazyusufcan.questionapp.mapper.PostMapper;
 import com.korkmazyusufcan.questionapp.repository.PostRepository;
 import org.springframework.stereotype.Service;
@@ -34,10 +36,7 @@ public class PostService {
     };
 
     public List<PostDto> getPostsByUser(Long userId) {
-        //TODO
-        // POST NOT FOUND CASE SHOULD BE IMPLEMENT
         List<Post> postList = postRepository.findByUserId(userId);
-
         return postList
                 .stream()
                 .map(postMapper::toDto)
@@ -49,27 +48,20 @@ public class PostService {
                 userService.findUserById(postCreateRequest.getUserId()),
                 postCreateRequest.getText()
         );
-
         return postMapper.toDto( postRepository.save(newPost));
     }
 
     public PostDto updatePost(Long postId, PostUpdateRequest postUpdateRequest) {
-        //TODO
-        // POST NOT FOUND CASE SHOULD BE IMPLEMENT
-        Post post = postRepository.findById(postId).orElseThrow();
+        Post post = postRepository.findById(postId).orElseThrow(()-> new NotFoundException(ExceptionEntity.Post));
         post.setText(postUpdateRequest.getText());
         return postMapper.toDto(postRepository.save(post));
     }
 
     public void deletePostById(Long postId) {
-        //TODO
-        // POST NOT FOUND CASE SHOULD BE IMPLEMENT
         postRepository.deleteById(postId);
     }
 
     protected Post findPostById(Long postId){
-        //TODO
-        // POST NOT FOUND CASE SHOULD BE IMPLEMENT
-        return postRepository.findById(postId).orElseThrow(null);
+        return postRepository.findById(postId).orElseThrow(() -> new NotFoundException(ExceptionEntity.Post));
     }
 }

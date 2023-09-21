@@ -4,6 +4,9 @@ import com.korkmazyusufcan.questionapp.dto.request.PostCommentRequest;
 import com.korkmazyusufcan.questionapp.dto.request.UpdateCommentRequest;
 import com.korkmazyusufcan.questionapp.dto.response.CommentResponse;
 import com.korkmazyusufcan.questionapp.entity.Comment;
+import com.korkmazyusufcan.questionapp.entity.User;
+import com.korkmazyusufcan.questionapp.exception.ExceptionEntity;
+import com.korkmazyusufcan.questionapp.exception.NotFoundException;
 import com.korkmazyusufcan.questionapp.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -27,13 +30,7 @@ public class CommentService {
 
     public List<CommentResponse> getAllCommentsWithParameter(Optional<Long> userId, Optional<Long> postId) {
         List<Comment> commentList;
-        if(userId.isPresent() && postId.isPresent())
-        {
-            //TODO
-            // CREATE RELATED QUERY FROM REPOSİTORY
-            commentList = commentRepository.findAll();
-        }
-        else if (userId.isPresent())
+        if (userId.isPresent())
         {
             commentList = commentRepository.findByUserId(userId.get());
         }
@@ -52,9 +49,7 @@ public class CommentService {
     }
 
     public CommentResponse getCommentById(Long commentId) {
-        //TODO
-        // CREATE COMMENT NOT FOUND EXCEPTION
-        Comment comment = commentRepository.findById(commentId).orElseThrow(null);
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()-> new NotFoundException(ExceptionEntity.Comment));
         return new CommentResponse(comment);
     }
 
@@ -73,19 +68,14 @@ public class CommentService {
         );
     }
 
-
     public void updateComment(Long commentId, UpdateCommentRequest updateCommentRequest) {
-        //TODO
-        // CREATE COMMENT NOT FOUND EXCEPTION
-        Comment comment = commentRepository.findById(commentId).orElseThrow(null);
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new NotFoundException(ExceptionEntity.Comment));
         comment.setText(updateCommentRequest.getText());
         commentRepository.save(comment);
 
     }
 
     public void deleteComment(Long commentId) {
-        //TODO
-        // CREATE COMMENT NOT FOUND EXCEPTION
         commentRepository.deleteById(commentId);
     }
 }

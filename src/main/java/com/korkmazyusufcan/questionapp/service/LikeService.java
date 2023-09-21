@@ -3,6 +3,8 @@ package com.korkmazyusufcan.questionapp.service;
 import com.korkmazyusufcan.questionapp.dto.request.CreateLikeRequest;
 import com.korkmazyusufcan.questionapp.dto.response.LikeResponse;
 import com.korkmazyusufcan.questionapp.entity.Like;
+import com.korkmazyusufcan.questionapp.exception.ExceptionEntity;
+import com.korkmazyusufcan.questionapp.exception.NotFoundException;
 import com.korkmazyusufcan.questionapp.repository.LikeRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -29,13 +31,7 @@ public class LikeService {
     public List<LikeResponse> getAllLikesWithParameter(Optional<Long> postId, Optional<Long> userId) {
         List<Like> likeList;
 
-        if(postId.isPresent() && userId.isPresent())
-        {
-            //TODO
-            // CREATE RELATED QUERY FROM REPOSİTORY
-            likeList = likeRepository.findAll();
-        }
-        else if (postId.isPresent())
+        if (postId.isPresent())
         {
            likeList = likeRepository.findByPostId(postId.get());
         }
@@ -55,9 +51,7 @@ public class LikeService {
     }
 
     public LikeResponse getLikeById(Long likeId) {
-        //TODO
-        // LIKE NOT FOUND
-        Like like = likeRepository.findById(likeId).orElseThrow(null);
+        Like like = likeRepository.findById(likeId).orElseThrow(()-> new NotFoundException(ExceptionEntity.Like));
 
         return new LikeResponse(
                 like.getId(),

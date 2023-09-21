@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     //TODO
-    // RELOAD ALL SECURİTY CONFİG 
+    // RELOAD ALL SECURİTY CONFİG
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http

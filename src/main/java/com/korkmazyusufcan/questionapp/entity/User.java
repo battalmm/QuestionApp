@@ -22,10 +22,19 @@ public class User {
 
     private String surname;
 
+    private String password;
+
     private String email;
 
     @CreationTimestamp
     private LocalDate creationDate;
+
+    public User(String name, String surname, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+    }
 
     public User(String name, String surname, String email) {
         this.name = name;
