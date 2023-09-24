@@ -4,7 +4,6 @@ import com.korkmazyusufcan.questionapp.dto.request.PostCommentRequest;
 import com.korkmazyusufcan.questionapp.dto.request.UpdateCommentRequest;
 import com.korkmazyusufcan.questionapp.dto.response.CommentResponse;
 import com.korkmazyusufcan.questionapp.entity.Comment;
-import com.korkmazyusufcan.questionapp.entity.User;
 import com.korkmazyusufcan.questionapp.exception.ExceptionEntity;
 import com.korkmazyusufcan.questionapp.exception.NotFoundException;
 import com.korkmazyusufcan.questionapp.repository.CommentRepository;

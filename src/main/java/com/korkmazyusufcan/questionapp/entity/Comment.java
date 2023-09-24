@@ -1,5 +1,6 @@
 package com.korkmazyusufcan.questionapp.entity;
 
+import com.korkmazyusufcan.questionapp.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,7 +29,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private  User user;
+    private User user;
 
     @Column(columnDefinition = "text")
     private String text;

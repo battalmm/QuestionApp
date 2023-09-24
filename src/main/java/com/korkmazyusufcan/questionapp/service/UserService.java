@@ -3,7 +3,7 @@ package com.korkmazyusufcan.questionapp.service;
 import com.korkmazyusufcan.questionapp.dto.UserDto;
 import com.korkmazyusufcan.questionapp.dto.request.UserCreateRequest;
 import com.korkmazyusufcan.questionapp.dto.request.UserUpdateRequest;
-import com.korkmazyusufcan.questionapp.entity.User;
+import com.korkmazyusufcan.questionapp.entity.user.User;
 import com.korkmazyusufcan.questionapp.exception.AlreadyExistException;
 import com.korkmazyusufcan.questionapp.exception.ExceptionEntity;
 import com.korkmazyusufcan.questionapp.exception.NotFoundException;

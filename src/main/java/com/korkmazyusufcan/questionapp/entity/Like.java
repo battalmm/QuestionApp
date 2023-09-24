@@ -1,5 +1,6 @@
 package com.korkmazyusufcan.questionapp.entity;
 
+import com.korkmazyusufcan.questionapp.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

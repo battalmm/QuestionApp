@@ -1,17 +1,19 @@
-package com.korkmazyusufcan.questionapp.entity;
+package com.korkmazyusufcan.questionapp.entity.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDate;
 
-@Builder
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name ="user")
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name ="user")
 public class User {
 
     @Id
@@ -22,12 +24,18 @@ public class User {
 
     private String surname;
 
+    @NotNull
     private String password;
 
+    @Email
+    @Column(unique = true)
     private String email;
 
     @CreationTimestamp
     private LocalDate creationDate;
+
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
     public User(String name, String surname, String email, String password) {
         this.name = name;
