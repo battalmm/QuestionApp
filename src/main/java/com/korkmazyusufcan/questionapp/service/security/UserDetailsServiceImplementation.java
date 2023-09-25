@@ -1,4 +1,4 @@
-package com.korkmazyusufcan.questionapp.service;
+package com.korkmazyusufcan.questionapp.service.security;
 
 import com.korkmazyusufcan.questionapp.entity.user.JwtUser;
 import com.korkmazyusufcan.questionapp.entity.user.User;
