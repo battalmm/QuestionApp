@@ -1,4 +1,4 @@
-package com.korkmazyusufcan.questionapp.entity.user;
+package com.korkmazyusufcan.questionapp.security;
 
 import lombok.Getter;
 import lombok.Setter;

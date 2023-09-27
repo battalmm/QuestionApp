@@ -79,11 +79,14 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    public void isEmailExist(String email){
+        if (userRepository.findByEmail(email) != null) {
+            throw new AlreadyExistException(ExceptionEntity.User);
+        }
+    }
+
     protected User findUserById(Long id){
         return userRepository.findById(id).orElseThrow( () -> new NotFoundException(ExceptionEntity.User));
     }
 
-    protected Boolean isEmailExist(String email){
-        return userRepository.findByEmail(email) != null;
-    }
 }
