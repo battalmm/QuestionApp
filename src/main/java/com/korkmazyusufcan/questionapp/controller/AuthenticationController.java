@@ -18,7 +18,8 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserService userService;
 
-    public AuthenticationController(AuthenticationService authenticationService, UserService userService) {
+    public AuthenticationController(AuthenticationService authenticationService,
+                                    UserService userService) {
         this.authenticationService = authenticationService;
         this.userService = userService;
     }

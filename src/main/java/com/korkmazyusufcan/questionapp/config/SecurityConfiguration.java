@@ -1,6 +1,6 @@
 package com.korkmazyusufcan.questionapp.config;
 
-import com.korkmazyusufcan.questionapp.security.JwtAuthenticationEntryPoint;
+
 import com.korkmazyusufcan.questionapp.security.JwtAuthenticationFilter;
 import com.korkmazyusufcan.questionapp.service.security.UserDetailsServiceImplementation;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final JwtAuthenticationEntryPoint entryPointHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -40,41 +39,17 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .exceptionHandling(handler -> handler.authenticationEntryPoint(entryPointHandler))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                //.exceptionHandling(handler -> handler.authenticationEntryPoint(entryPointHandler))
+                //.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/v1/posts")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/posts","/api/v1/comments")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/comments")
-                        .permitAll()
-                        .requestMatchers("/api/v1/auth/**")
+                        .requestMatchers(HttpMethod.POST,"/api/v1/auth/login","/api/v1/auth/register")
                         .permitAll()
                         .anyRequest().authenticated()
                 );
-
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
                 return http.build();
-
     }
-
-/*
-    @Bean
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/**")
-                                .anonymous()
-                        .anyRequest()
-                                .permitAll()
-                        )
-                .csrf(csrf ->
-                        // BAD - CSRF protection shouldn't be disabled
-                        csrf.disable()
-                );
-        return http.build();
-    }
- */
 }
