@@ -3,26 +3,20 @@ package com.korkmazyusufcan.questionapp.controller;
 import com.korkmazyusufcan.questionapp.dto.request.AuthenticationRequest;
 import com.korkmazyusufcan.questionapp.dto.request.UserCreateRequest;
 import com.korkmazyusufcan.questionapp.dto.response.AuthenticationResponse;
-import com.korkmazyusufcan.questionapp.service.UserService;
 import com.korkmazyusufcan.questionapp.service.security.AuthenticationService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-    private final UserService userService;
 
-    public AuthenticationController(AuthenticationService authenticationService,
-                                    UserService userService) {
-        this.authenticationService = authenticationService;
-        this.userService = userService;
-    }
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;}
 
     @PostMapping("/login")
     public AuthenticationResponse login(@RequestBody AuthenticationRequest authenticationRequest){

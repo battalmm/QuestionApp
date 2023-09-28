@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-/*
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
@@ -18,7 +17,5 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
-        // response.sendRedirect("/login");
     }
 }
-*/
