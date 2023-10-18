@@ -21,9 +21,18 @@ public class CommentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CommentResponse>> getAllComments(@RequestParam Optional<Long> userId,
-                                                                @RequestParam Optional<Long> postId){
-        return ResponseEntity.ok(commentService.getAllCommentsWithParameter(userId, postId));
+    public ResponseEntity<List<CommentResponse>> getAllComments(){
+        return ResponseEntity.ok(commentService.getAllComments());
+    }
+
+    @GetMapping("/user")
+    public List<CommentResponse> getAllCommentsByUserId(@RequestParam Long userId){
+        return commentService.getAllCommentsByUserId(userId);
+    }
+
+    @GetMapping("/post")
+    public List<CommentResponse> getAllCommentsByPostId(@RequestParam Long postId){
+        return commentService.getAllCommentsByPostId(postId);
     }
 
     @GetMapping("/{commentId}")

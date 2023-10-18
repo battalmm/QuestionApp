@@ -44,4 +44,13 @@ public class Comment {
         this.user = user;
         this.text = text;
     }
+    public Comment(Long id,
+                   Post post,
+                   User user,
+                   String text) {
+        this.id = id;
+        this.post = post;
+        this.user = user;
+        this.text = text;
+    }
 }

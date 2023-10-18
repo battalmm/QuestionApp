@@ -27,21 +27,29 @@ public class CommentService {
         this.postService = postService;
     }
 
-    public List<CommentResponse> getAllCommentsWithParameter(Optional<Long> userId, Optional<Long> postId) {
+    public List<CommentResponse> getAllComments() {
         List<Comment> commentList;
-        if (userId.isPresent())
-        {
-            commentList = commentRepository.findByUserId(userId.get());
-        }
-        else if (postId.isPresent())
-        {
-            commentList = commentRepository.findByPostId(postId.get());
-        }
-        else
-        {
-            commentList= commentRepository.findAll();
-        }
+        commentList = commentRepository.findAll();
+
         return commentList
+                .stream()
+                .map(CommentResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<CommentResponse> getAllCommentsByUserId(Long userId) {
+        List<Comment> userComments;
+        userComments = commentRepository.findByUserId(userService.findUserById(userId).getId());
+        return userComments
+                .stream()
+                .map(CommentResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<CommentResponse> getAllCommentsByPostId(Long postId) {
+        List<Comment> postComments;
+        postComments = commentRepository.findByPostId(postService.findPostById(postId).getId());
+        return postComments
                 .stream()
                 .map(CommentResponse::new)
                 .collect(Collectors.toList());
@@ -58,12 +66,12 @@ public class CommentService {
                 userService.findUserById(postCommentRequest.getUserId()),
                 postCommentRequest.getText()
         );
-        commentRepository.save(comment);
+        Comment savedComment = commentRepository.save(comment);
 
         return new CommentResponse(
-                comment.getId(),
-                comment.getUser().getName(),
-                comment.getText()
+                savedComment.getId(),
+                savedComment.getUser().getName(),
+                savedComment.getText()
         );
     }
 
@@ -77,4 +85,5 @@ public class CommentService {
     public void deleteComment(Long commentId) {
         commentRepository.deleteById(commentId);
     }
+
 }

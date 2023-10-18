@@ -75,7 +75,6 @@
 			<version>0.11.5</version>
 		</dependency>
 
-
 		<!-- TEST -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
