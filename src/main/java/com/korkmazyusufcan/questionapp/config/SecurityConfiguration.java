@@ -43,7 +43,7 @@ public class SecurityConfiguration {
                 .exceptionHandling(handler -> handler.authenticationEntryPoint(entryPointHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/v1/posts/*","/api/v1/comments/*","/api/v1/users")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/posts/*","/api/v1/posts","/api/v1/comments/*","/api/v1/comments","/api/v1/likes")
                         .permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/v1/auth/login","/api/v1/auth/register")
                         .permitAll()

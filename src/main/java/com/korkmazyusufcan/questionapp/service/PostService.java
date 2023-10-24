@@ -36,7 +36,8 @@ public class PostService {
     };
 
     public List<PostDto> getPostsByUser(Long userId) {
-        List<Post> postList = postRepository.findByUserId(userId);
+        Long checkedUserId = userService.findUserById(userId).getId();
+        List<Post> postList = postRepository.findByUserId(checkedUserId);
         return postList
                 .stream()
                 .map(postMapper::toDto)

@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Table(name = "post")
 @Entity
+@EqualsAndHashCode
 public class Post {
 
     @Id

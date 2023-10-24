@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Table(name = "p_like")
 @Entity
+@EqualsAndHashCode
 public class Like {
 
     @Id

@@ -85,7 +85,7 @@ public class UserService {
         }
     }
 
-    protected User findUserById(Long id){
+    protected User findUserById(Long id) throws NotFoundException{
         return userRepository.findById(id).orElseThrow( () -> new NotFoundException(ExceptionEntity.User));
     }
 
